@@ -1,0 +1,9 @@
+<h1>show page for comment</h1>
+
+<form action="<%=post_comments_url(params[:id])%>" method="POST">
+  <%= auth_token %>
+  <label>Reply to this comment
+    <textarea name="comment[content]" rows="8" cols="40"></textarea>
+  </label>
+  <input type="submit"  value="Submit">
+</form>

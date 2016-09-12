@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RedditClone</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<header> <img src="https://www.redditstatic.com/icon.png" height="150px" width="950px"><font size="8" color="red">REDDIT</font>
+</header>
+<body bgcolor="e1f5fe">
+  <hr>
+  <% if logged_in? %>
+    <%= current_user.username %> is currently logged in
+    <form action="<%= session_url %>" method="POST">
+      <input type="hidden" name="_method" value="DELETE">
+      <%= auth_token %>
+      <input type="submit" value="Logout">
+    </form>
+  <% else %>
+    <a href="<%= new_session_url %>">Log In</a>
+  <% end %>
+<hr>
+
+<%= yield %>
+
+</body>
+</html>

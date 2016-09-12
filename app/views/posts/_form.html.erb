@@ -1,0 +1,30 @@
+<% action = @post.persisted? ? post_url(@post.id) : sub_posts_url(params[:sub_id]) %>
+<% method = @post.persisted? ? "PATCH" : "POST" %>
+
+
+<form action="<%= action %>" method="POST">
+  <%= auth_token %>
+  <input type="hidden" name="_method" value="<%= method %>"
+  <%= auth_token %>
+  <label>Title:
+    <input type="text" name="post[title]" value="<%= @post.title %>">
+  </label>
+
+  <br><br>
+
+  <label>Content:
+    <textarea name="post[content]"><%= @post.content %></textarea>
+  </label>
+
+  <br><br>
+
+  <% @subs.each do |subreddit| %>
+    <label><%= subreddit.title %>
+    <input type="checkbox" name="post[sub_ids][]" value=" <%= subreddit.id %>"
+    <%= "checked" if @post.sub_ids.include?(subreddit.id) %> >
+    </label>
+  <% end %>
+
+  <input type="submit" value="Submit">
+
+</form>
